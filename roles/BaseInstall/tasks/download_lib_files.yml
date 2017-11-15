@@ -1,8 +1,19 @@
 
 
 
+- name: "Download Lib Files | Check if Python-{{ python_version }}.tar.xz is in {{ base_file_dir }}"
+  stat: path={{ item }}
+  with_items:
+    - '{{ base_file_dir }}/Python-{{ python_version }}.tar.xz'
+  register: check_lib_files
+  changed_when: False
+  delegate_to: localhost
+
+
+
 - name: "Download Lib Files | Download Python Version {{ python_version }} to {{ base_file_dir }}"
   get_url:
     url: "{{ python_download_link }}"
     dest: "{{ base_file_dir }}"
   delegate_to: localhost
+  when: check_lib_files.results.0.stat.exists == false
