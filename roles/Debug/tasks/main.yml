@@ -1,0 +1,27 @@
+---
+# tasks file for Debug
+
+
+- name: Dump all vars
+  action: template src="{{ playbook_dir }}/roles/Debug/templates/dumpall.j2"    dest="{{ playbook_dir }}/roles/Debug/output" mode=777
+  delegate_to: localhost
+
+#- debug: var=check_repo_list
+
+#- debug:
+#    msg: "Match!"
+#  when: virtualbox not in check_repo_list.stdout | search("virtualbox")
+#  when: '"virtualbox"  not in check_repo_list.stdout_lines'
+#
+
+#- name: Check Ansible version
+#  command: ansible --version
+#  register: ansibleVersion
+
+#- name: Print version
+#  debug:
+#    msg: "Ansible Version: {{ ansibleVersion.stdout }}"
+#
+#- debug:
+#    var: item.stat.exists
+#  with_items: "{{ check_vpn_exp_files.results }}"

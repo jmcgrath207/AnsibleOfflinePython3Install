@@ -1,6 +1,6 @@
-- hosts: localhost
-  become: yes
+- hosts: all
   roles:
     - { role: BaseInstall, tags: [ 'BaseInstall'] }
+    - { role: Debug, tags: [ 'Debug'] }
 
 

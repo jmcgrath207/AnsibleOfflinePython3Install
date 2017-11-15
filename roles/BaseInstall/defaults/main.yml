@@ -1,2 +1,6 @@
 ---
 # defaults file for BaseInstall
+
+base_file_dir: "{{ playbook_dir }}/roles/BaseInstall/files"
+
+python_download_link: https://www.python.org/ftp/python/3.6.3/Python-3.6.3.tar.xz

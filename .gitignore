@@ -157,3 +157,5 @@ venv.bak/
 
 *.xml
 *.iml
+roles/Debug/output/*
+/roles/Debug/output
