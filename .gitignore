@@ -159,3 +159,4 @@ venv.bak/
 *.iml
 roles/Debug/output/*
 /roles/Debug/output
+/roles/BaseInstall/files/*

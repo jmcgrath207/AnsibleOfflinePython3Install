@@ -1,7 +1,8 @@
 
 
 
-- name: Download Python3 to
+- name: "Download Python3 to {{ base_file_dir }}"
   get_url:
     url: "{{ python_download_link }}"
     dest: "{{ base_file_dir }}"
+  delegate_to: localhost
