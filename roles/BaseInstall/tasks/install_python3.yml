@@ -1,3 +1,29 @@
 
 
-"{{ ansible_env.HOME }}"
+
+- name: "Install Python {{ python_version }}  | Check if {{ ansible_env.HOME }}/Python-{{ python_version }} is path exist"
+  raw: "find {{ ansible_env.HOME }}/Python-{{ python_version }}/* -maxdepth 0 -empty"
+  register: Python3_check
+  failed_when: Python3_check.rc > 1
+  changed_when: Python3_check.rc == 1
+
+
+
+- name: "Install Python {{ python_version }} | Uncompress {{ base_file_dir }}/Python-{{ python_version }}.tar.xz to {{ ansible_env.HOME }}"
+  unarchive:
+    src:   "{{ base_file_dir }}/Python-{{ python_version }}.tar.xz"
+    remote_src: no
+    dest: "{{ ansible_env.HOME }}"
+  when: Python3_check.rc == 1
+
+
+
+- name: "Install Python {{ python_version }} | Build Python {{ python_version }} "
+  shell: "{{ item }}"
+  args:
+    chdir: "{{ ansible_env.HOME }}/Python-{{ python_version }}"
+  with_items:
+    - "./configure --prefix={{ ansible_env.HOME }}/python3"
+    - make
+    - make install
+  when: Python3_check.rc == 1
