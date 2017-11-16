@@ -1,44 +1,41 @@
 
 
 
-#- name: "Install Python {{ python_version }}  | Check if {{ ansible_env.HOME }}/Python-{{ python_version }} is path exist"
-#  raw: "find {{ ansible_env.HOME }}/Python-{{ python_version }}/* -maxdepth 0 -empty"
-#  register: Python3_check
-#  failed_when: Python3_check.rc > 1
-#  changed_when: Python3_check.rc == 1
-#
-#
-#
-#- name: "Install Python {{ python_version }} | Uncompress {{ base_file_dir }}/Python-{{ python_version }}.tar.xz to {{ ansible_env.HOME }}"
-#  unarchive:
-#    src:   "{{ base_file_dir }}/Python-{{ python_version }}.tar.xz"
-#    remote_src: no
-#    dest: "{{ ansible_env.HOME }}"
-#  when: Python3_check.rc == 1
-#
-#
-#
-#- name: "Install Python {{ python_version }} | Build Python {{ python_version }} "
-#  shell: "{{ item }}"
-#  args:
-#    chdir: "{{ ansible_env.HOME }}/Python-{{ python_version }}"
-#  with_items:
-#    - "./configure --prefix={{ ansible_env.HOME }}/python3"
-#    - make
-#    - make install
-#  when: Python3_check.rc == 1
+- name: "Install Python {{ python_version }}  | Check if {{ ansible_env.HOME }}/Python-{{ python_version }} is path exist"
+  raw: "find {{ ansible_env.HOME }}/Python-{{ python_version }}/* -maxdepth 0 -empty"
+  register: Python3_check
+  failed_when: Python3_check.rc > 1
+  changed_when: Python3_check.rc == 1
 
 
-- name: Ansible copy directory to the remote server
+
+- name: "Install Python {{ python_version }} | Uncompress {{ base_file_dir }}/Python-{{ python_version }}.tar.xz to {{ ansible_env.HOME }}"
+  unarchive:
+    src:   "{{ base_file_dir }}/Python-{{ python_version }}.tar.xz"
+    remote_src: no
+    dest: "{{ ansible_env.HOME }}"
+  when: Python3_check.rc == 1
+
+
+
+- name: "Install Python {{ python_version }} | Build Python {{ python_version }} "
+  shell: "{{ item }}"
+  args:
+    chdir: "{{ ansible_env.HOME }}/Python-{{ python_version }}"
+  with_items:
+    - "./configure --prefix={{ ansible_env.HOME }}/python3"
+    - make
+    - make install
+  when: Python3_check.rc == 1
+
+
+- name: "copy directory {{ base_file_dir }}/pythonlibs to {{ ansible_env.HOME }} on the remote server"
   copy:
     src: "{{ base_file_dir }}/pythonlibs"
     dest: "{{ ansible_env.HOME }}"
 
 
-#- name: "Install Python {{ python_version }} | Build Python {{ python_version }} "
-#  shell: "pip3 install --no-index --find-links='{{ ansible_env.HOME }}/pythonlibs' {{ item }}'"
-#  args:
-#    chdir: "{{ ansible_env.HOME }}/python3/bin"
-#  with_items:
-#    - requests
-#  when: Python3_check.rc == 1
+- name: "Install Python {{ python_version }} | Build Python {{ python_version }} "
+  shell: "{{ ansible_env.HOME }}/python3/bin/pip3 install --no-index --find-links={{ ansible_env.HOME }}/pythonlibs {{ item }}"
+  with_items:
+    - '{{ python_lib_list }}'

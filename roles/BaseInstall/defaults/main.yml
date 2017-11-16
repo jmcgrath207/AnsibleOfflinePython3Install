@@ -3,8 +3,13 @@
 
 base_file_dir: "{{ playbook_dir }}/roles/BaseInstall/files"
 
-python_main_version: 3.6
-python_version: "{{ python_main_version }}.3"
+python_main_version: 3.5 # Example 3.5.X
+python_version: "{{ python_main_version }}.2" # example X.X.3
 
 python_download_link: "https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tar.xz"
+
+
+
+
+python_lib_list: [XlsxWriter]
 
