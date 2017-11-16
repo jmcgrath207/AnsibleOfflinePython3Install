@@ -35,7 +35,7 @@
     dest: "{{ ansible_env.HOME }}"
 
 
-- name: "Install Python {{ python_version }} | Build Python {{ python_version }} "
+- name: "Install Python {{ python_version }} | Install  Python  Libs: {{  python_lib_list | join(', ') }}  for {{ ansible_env.HOME }}/python3/bin/python3"
   shell: "{{ ansible_env.HOME }}/python3/bin/pip3 install --no-index --find-links={{ ansible_env.HOME }}/pythonlibs {{ item }}"
   with_items:
     - '{{ python_lib_list }}'
