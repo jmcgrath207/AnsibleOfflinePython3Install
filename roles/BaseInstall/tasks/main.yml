@@ -2,8 +2,8 @@
 # tasks file for BaseInstall
 
 
-- import_tasks: download_lib_files.yml
-  tags: [BaseDownloadLibFiles]
+- import_tasks: download_python_3_lib_files.yml
+  tags: [BaseDownloadPython3LibFiles]
 
 - import_tasks: install_python3.yml
   tags: [BaseInstallPython3]

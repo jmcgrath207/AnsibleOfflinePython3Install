@@ -3,8 +3,8 @@
 
 base_file_dir: "{{ playbook_dir }}/roles/BaseInstall/files"
 
-
-python_version: 3.6.3
+python_main_version: 3.6
+python_version: "{{ python_main_version }}.3"
 
 python_download_link: "https://www.python.org/ftp/python/{{ python_version }}/Python-{{ python_version }}.tar.xz"
 
