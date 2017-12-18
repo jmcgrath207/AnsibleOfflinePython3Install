@@ -20,7 +20,7 @@
 
 
 - name: "Install Python {{ python_version }} | Download Python Libs: {{  python_lib_list | join(', ') }} "
-  shell: "pip3 install --download='{{ base_file_dir }}/pythonlibs' {{ item }}"
+  shell: "pip3 download  -d '{{ base_file_dir }}/pythonlibs' {{ item }}"
   with_items:
     - '{{ python_lib_list }}'
   delegate_to: localhost
