@@ -10,6 +10,7 @@ python_download_link: "https://www.python.org/ftp/python/{{ python_version }}/Py
 
 
 
-
-python_lib_list: [XlsxWriter,netmiko,PyMySQL,sshuttle]
+## Add python packages you want installed in the list below
+## ex. python_lib_list: [ansible,sshuttle,requests]
+python_lib_list: [ansible,sshuttle,requests]
 

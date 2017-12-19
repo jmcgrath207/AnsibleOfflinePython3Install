@@ -23,16 +23,25 @@
   args:
     chdir: "{{ ansible_env.HOME }}/Python-{{ python_version }}"
   with_items:
-    - "./configure --prefix={{ ansible_env.HOME }}/python3"
+    - "./configure --prefix={{ ansible_env.HOME }}/python3 --with-ensurepip=install"
     - make
     - make install
   when: Python3_check.rc == 1
 
 
+#- name: "copy directory {{ base_file_dir }}/pythonlibs to {{ ansible_env.HOME }} on the remote server"
+#  copy:
+#    src: "{{ base_file_dir }}/pythonlibs"
+#    dest: "{{ ansible_env.HOME }}"
+
+
 - name: "copy directory {{ base_file_dir }}/pythonlibs to {{ ansible_env.HOME }} on the remote server"
-  copy:
+  synchronize:
     src: "{{ base_file_dir }}/pythonlibs"
     dest: "{{ ansible_env.HOME }}"
+    rsync_opts:
+    - "--ignore-existing"
+
 
 
 - name: "Install Python {{ python_version }} | Install  Python  Libs: {{  python_lib_list | join(', ') }}  for {{ ansible_env.HOME }}/python3/bin/python3"
