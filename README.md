@@ -12,8 +12,8 @@ ansible-playbook playbook.yml --extra-vars ansible_python_interpreter=/usr/bin/p
 
 ### ensure packages are installed on Host systems ###
 #### Note: Python will not compile and pip will not install without these packages
-Yum Based: sudo yum install openssl-devel gcc -y
-Apt-get based: apt-get install libssl-dev openssl gcc -y
+Yum Based: sudo yum install openssl-devel gcc rsync -y
+Apt-get based: apt-get install libssl-dev openssl gcc rsync -y
 
 
 
