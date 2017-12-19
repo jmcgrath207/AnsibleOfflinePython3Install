@@ -26,6 +26,7 @@
     - "./configure --prefix={{ ansible_env.HOME }}/python3 --with-ensurepip=install"
     - make
     - make install
+    - "chmod 755 -R {{ ansible_env.HOME }}/python3/"
   when: Python3_check.rc == 1
 
 
