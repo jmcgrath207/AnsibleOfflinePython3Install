@@ -1,2 +1,5 @@
 ---
 # vars file for BaseInstall
+
+vars:
+    python_folder_name: "{{ python_folder_name }}"
