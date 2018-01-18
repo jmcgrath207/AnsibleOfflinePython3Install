@@ -12,5 +12,6 @@ python_download_link: "https://www.python.org/ftp/python/{{ python_version }}/Py
 
 ## Add python packages you want installed in the list below
 ## ex. python_lib_list: [ansible,sshuttle,requests]
-python_lib_list: [pymysql,pandas,xlsxwriter,tqdm]
+python_lib_list: [ansible,Fabric3,PyMySQL,paramiko,pexpect,XlsxWriter,requests,'requests[security]',pywinrm,'pywinrm[kerberos]',
+'pywinrm[credssp]',sshuttle]
 
