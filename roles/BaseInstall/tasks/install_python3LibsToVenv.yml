@@ -1,13 +1,22 @@
 
+- name: "Install Python Libs To Venv {{ python_version }} | Check if Python Virtual Environment at {{ python_Venv_dir }} exist"
+  stat: path={{ item }}
+  with_items:
+    - '{{ python_Venv_dir }}/bin/pip3'
+  register: check_virt_env
+  changed_when: False
+  when: python_Venv_dir is defined
 
+- name: "Install Python Libs To Venv {{ python_version }} | Create Python Virtual Environment at {{ python_Venv_dir }}"
+  shell: "{{ ansible_env.HOME }}/{{ python_folder_name }}/bin/python3 -m venv {{ python_Venv_dir }}"
+  when: python_Venv_dir is defined and check_virt_env.results.0.stat.exists == false
 
-- name: "Install Python Libs To Install {{ python_version }} | Install  Python  Libs: {{  python_lib_list | join(', ') }}  for {{ ansible_env.HOME }}/{{ python_folder_name }}/bin/python3"
-  shell: "{{ ansible_env.HOME }}/{{ python_folder_name }}/bin/python3 install -m venv {{ python_Venv_dir }}"
+#- name: "Install Python Libs To Venv {{ python_version }} | Make Python Virtual Environment relocatable at {{ python_Venv_dir }}"
+#  shell: "{{ ansible_env.HOME }}/{{ python_folder_name }}/bin/python3  -m venv --relocatable {{ python_Venv_dir }}"
+#  when: python_Venv_dir != ''
 
-
-
-
-- name: "Install Python Libs To Venv {{ python_version }} | Install  Python  Libs: {{  python_lib_list | join(', ') }}  for  {{ python_Venv_dir }}/bin/python3"
+- name: "Install Python Libs To Venv {{ python_version }} | Install  Python  Libs: {{  python_lib_list_to_Venv | join(', ') }}  for  {{ python_Venv_dir }}/bin/python3"
   shell: "{{ python_Venv_dir }}/bin/pip3 install --no-index --find-links={{ ansible_env.HOME }}/pythonlibs {{ item }}"
   with_items:
-    - '{{ python_lib_list }}'
+    - '{{ python_lib_list_to_Venv }}'
+  when: python_Venv_dir is defined

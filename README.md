@@ -12,6 +12,11 @@ ansible-playbook playbook.yml --extra-vars "ansible_python_interpreter=/usr/bin/
 ```
 
 
+### Run Play Book to install to A virtual Environment
+```bash
+ansible-playbook  playbook.yml --tags "BaseInstall" --extra-vars "python_folder_name=Userpython3 python_Venv_dir=path/to/virtual/env" -u username -i hostname, -k  
+```
+
 ### ensure packages are installed on Host systems ###
 #### Note: Python will not compile and pip will not install without these packages
 

@@ -2,16 +2,16 @@
 # tasks file for BaseInstall
 
 
-- import_tasks: download_python_3_lib_files.yml
-  tags: [BaseDownloadPython3LibFiles]
-
-- import_tasks: install_python3.yml
-  tags: [BaseInstallPython3]
+#- import_tasks: download_python_3_lib_files.yml
+#  tags: [BaseDownloadPython3LibFiles]
+#
+#- import_tasks: install_python3.yml
+#  tags: [BaseInstallPython3]
 
 
 - import_tasks: install_python3LibsToInstall.yml
   tags: [BaseInstallPython3ToInstall]
 
 
-#- import_tasks: install_python3LibsToVenv.yml
-#  tags: [BaseInstallPython3ToInstallToVenv]
+- import_tasks: install_python3LibsToVenv.yml
+  tags: [BaseInstallPython3ToInstallToVenv]

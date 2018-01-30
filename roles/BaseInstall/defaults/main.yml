@@ -10,8 +10,15 @@ python_download_link: "https://www.python.org/ftp/python/{{ python_version }}/Py
 
 
 
-## Add python packages you want installed in the list below
+## Add python packages you want installed in the list below to Base Python Interpter
 ## ex. python_lib_list: [ansible,sshuttle,requests]
-python_lib_list: [ansible,Fabric3,PyMySQL,paramiko,pexpect,XlsxWriter,requests,'requests[security]',pywinrm,'pywinrm[kerberos]',
+python_lib_list_to_Install: [ansible,Fabric3,PyMySQL,paramiko,pexpect,XlsxWriter,requests,'requests[security]',pywinrm,'pywinrm[kerberos]',
 'pywinrm[credssp]',sshuttle,arrow,pandas,tqdm,gnureadline,'mysqlpy==2.1.7']
 
+## Add python packages you want installed in the list below to Python Virtual Enviroment
+## ex. python_lib_list: [ansible,sshuttle,requests]
+python_lib_list_to_Venv: ["sleekxmpp==1.3.1"]
+
+
+
+python_lib_list: "{{ python_lib_list_to_Install }} + {{ python_lib_list_to_Venv }}"
