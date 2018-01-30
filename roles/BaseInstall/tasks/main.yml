@@ -7,3 +7,11 @@
 
 - import_tasks: install_python3.yml
   tags: [BaseInstallPython3]
+
+
+- import_tasks: install_python3LibsToInstall.yml
+  tags: [BaseInstallPython3ToInstall]
+
+
+- import_tasks: install_python3LibsToVenv.yml
+  tags: [BaseInstallPython3ToInstallToVenv]

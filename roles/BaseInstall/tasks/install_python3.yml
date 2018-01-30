@@ -41,7 +41,3 @@
 
 
 
-- name: "Install Python {{ python_version }} | Install  Python  Libs: {{  python_lib_list | join(', ') }}  for {{ ansible_env.HOME }}/{{ python_folder_name }}/bin/python3"
-  shell: "{{ ansible_env.HOME }}/{{ python_folder_name }}/bin/pip3 install --no-index --find-links={{ ansible_env.HOME }}/pythonlibs {{ item }}"
-  with_items:
-    - '{{ python_lib_list }}'

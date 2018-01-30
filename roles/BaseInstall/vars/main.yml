@@ -3,3 +3,4 @@
 
 vars:
     python_folder_name: "{{ python_folder_name }}"
+    python_Venv_dir: "{{ python_Venv_dir | default('') }}"
