@@ -17,7 +17,7 @@ python_lib_list_to_Install: [ansible,Fabric3,PyMySQL,paramiko,pexpect,XlsxWriter
 
 ## Add python packages you want installed in the list below to Python Virtual Enviroment
 ## ex. python_lib_list: [ansible,sshuttle,requests]
-python_lib_list_to_Venv: ["sleekxmpp==1.3.1"]
+python_lib_list_to_Venv: ["sleekxmpp==1.3.1",dnspython]
 
 
 
